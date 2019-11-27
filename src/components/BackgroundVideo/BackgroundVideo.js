@@ -8,8 +8,8 @@ class BackgroundVideo extends PureComponent {
 		this.updateRandomVideo = this.updateRandomVideo.bind(this)
 
 		// In a real world scenario, this would come from the backend counting the number of files in the directory
-		this.darkSourcesLength = 3
-		this.lightSourcesLength = 2
+		this.darkSourcesLength = 5
+		this.lightSourcesLength = 4
 
 		this.state = {
 			randomVideo: 1
