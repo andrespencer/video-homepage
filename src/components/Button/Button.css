@@ -1,0 +1,11 @@
+.Button {
+	border: none;
+	background-color: transparent;
+	font: inherit;
+	color: white;
+	cursor: pointer;
+}
+
+.Button:focus {
+	outline: none;
+}

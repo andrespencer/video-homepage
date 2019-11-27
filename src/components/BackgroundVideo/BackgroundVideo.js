@@ -34,7 +34,7 @@ class BackgroundVideo extends PureComponent {
 
   render () {
     return (
-      <video autoPlay muted loop className="BackgroundVideo">
+      <video autoPlay muted loop className="BackgroundVideo" key={this.props.theme}>
 	      <source src={process.env.PUBLIC_URL + "/video/" + this.props.theme + "-" + this.state.randomVideo +".mp4"} type="video/mp4" />
 	    </video>
     )

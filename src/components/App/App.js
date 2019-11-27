@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react'
 import BackgroundVideo from '../BackgroundVideo/BackgroundVideo'
 import OverlayMessage from '../OverlayMessage/OverlayMessage'
+import ControlPanel from '../ControlPanel/ControlPanel'
 import translations from '../../translations'
 import './App.css'
 
@@ -8,9 +9,11 @@ class App extends PureComponent {
   constructor (props) {
     super(props)
 
-    this.handleHeadingChange = this.handleHeadingChange.bind(this)
-    this.handleHeadingChange = this.handleHeadingChange.bind(this)
+    this.getRandomTranslation = this.getRandomTranslation.bind(this)
     this.generateRandomSentence = this.generateRandomSentence.bind(this)
+    this.handleHeadingChange = this.handleHeadingChange.bind(this)
+    this.handleReset = this.handleReset.bind(this)
+    this.handleToggleTheme = this.handleToggleTheme.bind(this)
 
     this.state = {
       theme: "light",
@@ -61,7 +64,8 @@ class App extends PureComponent {
     this.setState({
       theme: theme,
       heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation"),
-      forceHeadingUpdate: true
+      forceHeadingUpdate: true,
+      userEdited: false
     })
   }
 
@@ -77,6 +81,17 @@ class App extends PureComponent {
     })
   }
 
+  handleReset () {
+    localStorage.removeItem("state")
+    this.generateRandomSentence()
+  }
+
+  handleToggleTheme () {
+    this.setState({
+      theme: this.state.theme === "light" ? "dark" : "light"
+    })
+  }
+
   render () {
     return (
       <div className="App">
@@ -88,6 +103,14 @@ class App extends PureComponent {
           handleChange={this.handleHeadingChange}
           savedText={translations.savedText}
           forceHeadingUpdate={this.state.forceHeadingUpdate}
+          userEdited={this.state.userEdited}
+        />
+        <ControlPanel
+          theme={this.state.theme}
+          translations={translations}
+          userEdited={this.state.userEdited}
+          handleReset={this.handleReset}
+          handleToggleTheme={this.handleToggleTheme}
         />
       </div>
     )
