@@ -56,7 +56,7 @@ class App extends PureComponent {
     } else if (hours > 17 && hours <= 23) {
       timeOfDay = "evening"
       theme = "dark"
-    } else if (hours > 23 && hours <= 5) {
+    } else if (hours >= 0 && hours <= 5) {
       timeOfDay = "night"
       theme = "dark"
     }
