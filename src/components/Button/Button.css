@@ -9,7 +9,8 @@
 	line-height: 2rem;
 }
 
-.Button:hover {
+.Button:hover,
+.Button:focus {
 	background-color: white;
 	color: black;
 }
