@@ -14,16 +14,17 @@ class App extends PureComponent {
     this.state = {
       theme: "light",
       heading: translations.defaultText,
-      userEdited: false
+      userEdited: false,
+      headingSentFromParent: true
     }
   }
  
   componentDidMount () {
     // If we have saved the state locally, let's load it now
     if (localStorage.getItem("state")) {
-      this.setState(
-        JSON.parse(localStorage.getItem("state"))
-      )
+      let newState = JSON.parse(localStorage.getItem("state"))
+      newState.headingSentFromParent = true
+      this.setState(newState)
     // Otherwise, we'll generate a random sentence and theme based on the time of the day
     } else {
       const now = new Date()
@@ -43,14 +44,15 @@ class App extends PureComponent {
       
       this.setState({
         theme: theme,
-        heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation")
+        heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation"),
+        headingSentFromParent: true
       })
     }
   }
 
   componentDidUpdate (prevProps, prevState) {
     if (this.state.userEdited && this.state !== prevState) {
-      // The usaer has made changes, so let's save it locally
+      // The user has made changes, so let's save it locally
       localStorage.setItem("state", JSON.stringify(this.state))
     }
   }
@@ -62,7 +64,8 @@ class App extends PureComponent {
   handleHeadingChange (e) {
     this.setState({
       heading: e.target.innerHTML,
-      userEdited: true
+      userEdited: true,
+      headingSentFromParent: false
     })
   }
 
@@ -76,6 +79,7 @@ class App extends PureComponent {
           heading={this.state.heading}
           handleChange={this.handleHeadingChange}
           savedText={translations.savedText}
+          headingSentFromParent={this.state.headingSentFromParent}
         />
       </div>
     )

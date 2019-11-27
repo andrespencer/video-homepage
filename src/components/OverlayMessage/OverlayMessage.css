@@ -12,11 +12,6 @@
   justify-content: center;
 }
 
-.OverlayMessage__Heading:focus {
-  outline: none;
-  box-shadow: 0 0 .5vh white;
-}
-
 .OverlayMessage__Heading {
 	border: .25vh solid white;
 	display: inline-block;
@@ -26,8 +21,12 @@
   margin: 0;
 }
 
+.OverlayMessage__Heading:focus {
+  outline: none;
+  box-shadow: 0 0 .5vh white;
+}
+
 .OverlayMessage__Saved {
   display: block;
   transition: opacity 1.5s;
 }
-
