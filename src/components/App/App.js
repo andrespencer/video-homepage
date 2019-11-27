@@ -18,7 +18,7 @@ class App extends PureComponent {
     this.state = {
       theme: "light",
       heading: translations.defaultText,
-      userEdited: false,
+      userChanged: !!localStorage.getItem("state"),
       forceHeadingUpdate: true
     }
   }
@@ -39,7 +39,7 @@ class App extends PureComponent {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (this.state.userEdited && this.state !== prevState) {
+    if (this.state.userChanged && this.state !== prevState) {
       // The user has made changes, so let's save it locally
       localStorage.setItem("state", JSON.stringify(this.state))
     }
@@ -65,7 +65,7 @@ class App extends PureComponent {
       theme: theme,
       heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation"),
       forceHeadingUpdate: true,
-      userEdited: false
+      userChanged: false
     })
   }
 
@@ -76,7 +76,7 @@ class App extends PureComponent {
   handleHeadingChange (e) {
     this.setState({
       heading: e.target.innerHTML,
-      userEdited: true,
+      userChanged: true,
       forceHeadingUpdate: false
     })
   }
@@ -103,12 +103,12 @@ class App extends PureComponent {
           handleChange={this.handleHeadingChange}
           savedText={translations.savedText}
           forceHeadingUpdate={this.state.forceHeadingUpdate}
-          userEdited={this.state.userEdited}
+          userChanged={this.state.userChanged}
         />
         <ControlPanel
           theme={this.state.theme}
           translations={translations}
-          userEdited={this.state.userEdited}
+          userChanged={this.state.userChanged}
           handleReset={this.handleReset}
           handleToggleTheme={this.handleToggleTheme}
         />

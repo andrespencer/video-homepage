@@ -10,7 +10,7 @@ class OverlayMessage extends PureComponent {
 
     this.state = {
       justSaved: false,
-      userChanged: false,
+      userChanged: this.props.userChanged,
       heading: this.props.heading
     }
   }
@@ -19,6 +19,11 @@ class OverlayMessage extends PureComponent {
     if (this.props.forceHeadingUpdate && this.props.heading !== this.state.heading) {
       this.setState({
         heading: this.props.heading
+      })
+    }
+    if (this.props.userChanged !== this.state.userChanged) {
+      this.setState({
+        userChanged: this.props.userChanged
       })
     }
   }
@@ -31,7 +36,7 @@ class OverlayMessage extends PureComponent {
   }
 
   handleBlur (e) {
-    if (this.state.userChanged && !this.state.justSaved && this.props.userEdited) {
+    if (this.state.userChanged && !this.state.justSaved) {
       this.setState({
         justSaved: true,
         heading: e.target.innerHTML
@@ -59,7 +64,7 @@ class OverlayMessage extends PureComponent {
         	</h1>
           <p 
             className="OverlayMessage__Saved"
-            style={this.state.justSaved && this.props.userEdited ? {opacity:1} : {opacity:0}}
+            style={this.state.justSaved && this.props.userChanged ? {opacity:1} : {opacity:0}}
           >
             {this.props.savedText}
           </p>

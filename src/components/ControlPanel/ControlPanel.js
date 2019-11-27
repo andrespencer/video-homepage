@@ -6,7 +6,7 @@ class ControlPanel extends PureComponent {
   render () {
     return (
     	<footer className="ControlPanel">
-    		{this.props.userEdited &&
+    		{this.props.userChanged &&
     			<Button
       			text={this.props.translations.resetText}
       			onClick={this.props.handleReset}
