@@ -13,30 +13,46 @@ class App extends PureComponent {
 
     this.state = {
       theme: "light",
-      heading: translations.defaultText
+      heading: translations.defaultText,
+      userEdited: false
     }
   }
  
   componentDidMount () {
-    const now = new Date()
-    const hours = now.getHours()
-    let stage = "morning"
-    let theme = "light"
+    // If we have saved the state locally, let's load it now
+    if (localStorage.getItem("state")) {
+      this.setState(
+        JSON.parse(localStorage.getItem("state"))
+      )
+    // Otherwise, we'll generate a random sentence and theme based on the time of the day
+    } else {
+      const now = new Date()
+      const hours = now.getHours()
+      let timeOfDay = "morning"
+      let theme = "light"
 
-    if (hours > 11 && hours <= 17) {
-      stage = "afternoon"
-    } else if (hours > 17 && hours <= 23) {
-      stage = "evening"
-      theme = "dark"
-    } else if (hours > 23 && hours <= 5) {
-      stage = "night"
-      theme = "dark"
+      if (hours > 11 && hours <= 17) {
+        timeOfDay = "afternoon"
+      } else if (hours > 17 && hours <= 23) {
+        timeOfDay = "evening"
+        theme = "dark"
+      } else if (hours > 23 && hours <= 5) {
+        timeOfDay = "night"
+        theme = "dark"
+      }
+      
+      this.setState({
+        theme: theme,
+        heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation")
+      })
     }
-    
-    this.setState({
-      theme: theme,
-      heading: this.getRandomTranslation(stage) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation")
-    })
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (this.state.userEdited && this.state !== prevState) {
+      // The usaer has made changes, so let's save it locally
+      localStorage.setItem("state", JSON.stringify(this.state))
+    }
   }
 
   getRandomTranslation (type) {
@@ -45,7 +61,8 @@ class App extends PureComponent {
 
   handleHeadingChange (e) {
     this.setState({
-      heading: e.target.innerHTML
+      heading: e.target.innerHTML,
+      userEdited: true
     })
   }
 
