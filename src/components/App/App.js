@@ -9,7 +9,8 @@ class App extends PureComponent {
     super(props)
 
     this.handleHeadingChange = this.handleHeadingChange.bind(this)
-    this.getRandomTranslation = this.getRandomTranslation.bind(this)
+    this.handleHeadingChange = this.handleHeadingChange.bind(this)
+    this.generateRandomSentence = this.generateRandomSentence.bind(this)
 
     this.state = {
       theme: "light",
@@ -22,35 +23,15 @@ class App extends PureComponent {
   componentDidMount () {
     // If we have saved the state locally, let's load it now
     if (localStorage.getItem("state")) {
-      /* When typing in a component that has contentEditable, updating the parent's state via callback will cause the child
-      component to re-render, which will in turn make the caret move to the beginning of the content.
-      To prevent this from happening, we only force an update of the child component when we know the parent is sending new
-      information (in this case, information stored in localStorage). */
+      /* When typing in a component that has contentEditable, updating the parent's state via callback will cause the child component to re-render, which will in turn make the caret move to the beginning of the content.
+      To prevent this from happening, we only force an update of the child component when we know the parent is sending a new heading (in this case, the heading stored in localStorage).
+      More information: https://github.com/facebook/react/issues/14904 */
       let newState = JSON.parse(localStorage.getItem("state"))
       newState.forceHeadingUpdate = true
       this.setState(newState)
     // Otherwise, we'll generate a random sentence and theme based on the time of the day
     } else {
-      const now = new Date()
-      const hours = now.getHours()
-      let timeOfDay = "morning"
-      let theme = "light"
-
-      if (hours > 11 && hours <= 17) {
-        timeOfDay = "afternoon"
-      } else if (hours > 17 && hours <= 23) {
-        timeOfDay = "evening"
-        theme = "dark"
-      } else if (hours > 23 && hours <= 5) {
-        timeOfDay = "night"
-        theme = "dark"
-      }
-      
-      this.setState({
-        theme: theme,
-        heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation"),
-        forceHeadingUpdate: true
-      })
+      this.generateRandomSentence()
     }
   }
 
@@ -59,6 +40,29 @@ class App extends PureComponent {
       // The user has made changes, so let's save it locally
       localStorage.setItem("state", JSON.stringify(this.state))
     }
+  }
+
+  generateRandomSentence () {
+    const now = new Date()
+    const hours = now.getHours()
+    let timeOfDay = "morning"
+    let theme = "light"
+
+    if (hours > 11 && hours <= 17) {
+      timeOfDay = "afternoon"
+    } else if (hours > 17 && hours <= 23) {
+      timeOfDay = "evening"
+      theme = "dark"
+    } else if (hours > 23 && hours <= 5) {
+      timeOfDay = "night"
+      theme = "dark"
+    }
+    
+    this.setState({
+      theme: theme,
+      heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation"),
+      forceHeadingUpdate: true
+    })
   }
 
   getRandomTranslation (type) {
