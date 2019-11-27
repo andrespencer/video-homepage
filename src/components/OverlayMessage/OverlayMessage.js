@@ -16,7 +16,7 @@ class OverlayMessage extends PureComponent {
   }
 
   componentDidUpdate () {
-    if (this.props.headingSentFromParent && this.props.heading !== this.state.heading) {
+    if (this.props.forceHeadingUpdate && this.props.heading !== this.state.heading) {
       this.setState({
         heading: this.props.heading
       })

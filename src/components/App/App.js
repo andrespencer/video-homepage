@@ -15,15 +15,19 @@ class App extends PureComponent {
       theme: "light",
       heading: translations.defaultText,
       userEdited: false,
-      headingSentFromParent: true
+      forceHeadingUpdate: true
     }
   }
  
   componentDidMount () {
     // If we have saved the state locally, let's load it now
     if (localStorage.getItem("state")) {
+      /* When typing in a component that has contentEditable, updating the parent's state via callback will cause the child
+      component to re-render, which will in turn make the caret move to the beginning of the content.
+      To prevent this from happening, we only force an update of the child component when we know the parent is sending new
+      information (in this case, information stored in localStorage). */
       let newState = JSON.parse(localStorage.getItem("state"))
-      newState.headingSentFromParent = true
+      newState.forceHeadingUpdate = true
       this.setState(newState)
     // Otherwise, we'll generate a random sentence and theme based on the time of the day
     } else {
@@ -45,7 +49,7 @@ class App extends PureComponent {
       this.setState({
         theme: theme,
         heading: this.getRandomTranslation(timeOfDay) + ', ' + this.getRandomTranslation("pronouns") + this.getRandomTranslation("punctuation"),
-        headingSentFromParent: true
+        forceHeadingUpdate: true
       })
     }
   }
@@ -65,7 +69,7 @@ class App extends PureComponent {
     this.setState({
       heading: e.target.innerHTML,
       userEdited: true,
-      headingSentFromParent: false
+      forceHeadingUpdate: false
     })
   }
 
@@ -79,7 +83,7 @@ class App extends PureComponent {
           heading={this.state.heading}
           handleChange={this.handleHeadingChange}
           savedText={translations.savedText}
-          headingSentFromParent={this.state.headingSentFromParent}
+          forceHeadingUpdate={this.state.forceHeadingUpdate}
         />
       </div>
     )
