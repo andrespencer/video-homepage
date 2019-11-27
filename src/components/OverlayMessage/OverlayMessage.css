@@ -30,3 +30,10 @@
   display: block;
   transition: opacity 1s ease;
 }
+
+@media only screen and (max-width: 600px) {
+  .OverlayMessage__Heading {
+    max-width: 70vw;
+    font-size: 6vh;
+  }
+}
