@@ -15,7 +15,9 @@ The app was designed so that a user can:
 ## Planned improvements
 
 1. Load a thumbnail of the video while the video loads
-2. Easter egg with the word "karma"
+2. Accessibility improvements
+3. Refactor to use React context
+4. Easter egg with the word "karma"
 
 ## Setup
 
