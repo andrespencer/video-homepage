@@ -28,5 +28,5 @@
 
 .OverlayMessage__Saved {
   display: block;
-  transition: opacity 1.5s;
+  transition: opacity 1s ease;
 }

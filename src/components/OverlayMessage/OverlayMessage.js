@@ -45,7 +45,7 @@ class OverlayMessage extends PureComponent {
         () => this.setState({
           justSaved: false,
           userChanged: false
-        }), 5000
+        }), 3000
       )
     }
   }

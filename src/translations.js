@@ -27,7 +27,7 @@ const translations = {
 		"!"
 	],
 	"savedText": "Saved! ✓",
-	"resetText": "⟳ Random",
+	"resetText": "⟳ Random text",
 	"lightModeText": "☼ Light Mode",
 	"darkModeText": "☽ Dark Mode"
 }
