@@ -75,6 +75,7 @@ class App extends PureComponent {
         <OverlayMessage 
           heading={this.state.heading}
           handleChange={this.handleHeadingChange}
+          savedText={translations.savedText}
         />
       </div>
     )

@@ -25,7 +25,8 @@ const translations = {
 	"punctuation": [
 		".",
 		"!"
-	]
+	],
+	"savedText": "Saved! ✅"
 }
 
 export default translations
