@@ -19,7 +19,8 @@ const translations = {
 	"pronouns": [
 		"friend",
 		"fellow human",
-		"good looking"
+		"good looking",
+		"adventurer"
 	],
 	"punctuation": [
 		".",

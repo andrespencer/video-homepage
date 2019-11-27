@@ -5,16 +5,26 @@ class BackgroundVideo extends PureComponent {
 	constructor (props) {
 		super(props)
 
+		this.updateRandomVideo = this.updateRandomVideo.bind(this)
+
 		// In a real world scenario, this would come from the backend counting the number of files in the directory
 		this.darkSourcesLength = 3
 		this.lightSourcesLength = 2
 
 		this.state = {
 			randomVideo: 1
-		}
+		}		
 	}
 
-	componentDidUpdate () {
+	componentDidMount () {
+		this.updateRandomVideo()
+	}
+
+	componentDidUpdate (prevProps) {
+		if (this.props.theme !== prevProps.theme) this.updateRandomVideo()
+	}
+
+	updateRandomVideo () {
 		const arrayLength = this.props.theme === "light" ? this.lightSourcesLength : this.darkSourcesLength
 
 		this.setState({
