@@ -7,6 +7,7 @@ class OverlayMessage extends PureComponent {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
 
     this.state = {
       justSaved: false,
@@ -50,6 +51,10 @@ class OverlayMessage extends PureComponent {
     }
   }
 
+  handleKeyDown (e) {
+    if (e.keyCode === 13) e.preventDefault()
+  }
+
   render () {
     return (
       <main className="OverlayMessage">
@@ -59,6 +64,7 @@ class OverlayMessage extends PureComponent {
             suppressContentEditableWarning={true}
             onInput={this.handleChange}
             onBlur={this.handleBlur}
+            onKeyDown={this.handleKeyDown}
           >
         		{this.state.heading}
         	</h1>
