@@ -14,8 +14,8 @@ The app was designed so that a user can:
 
 ## Planned improvements
 
-1. ~~Prevent user from making the heading vertically larger than the page~~
-2. Set `PropTypes`
+1. ~~Prevent user from making the heading vertically larger than the page~~ ✅
+2. ~~Set `PropTypes`~~ ✅
 3. Load a thumbnail of the video while the video loads
 4. Accessibility improvements
 5. Refactor to use React context

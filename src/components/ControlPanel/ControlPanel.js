@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import Button from '../Button/Button'
 import './ControlPanel.css' 
 
@@ -19,6 +20,14 @@ class ControlPanel extends PureComponent {
       </footer>
     )
   }
+}
+
+ControlPanel.propTypes = {
+  theme: PropTypes.string.isRequired,
+  translations: PropTypes.object.isRequired,
+  userChanged: PropTypes.bool.isRequired,
+  handleReset: PropTypes.func.isRequired,
+  handleToggleTheme: PropTypes.func.isRequired
 }
 
 export default ControlPanel

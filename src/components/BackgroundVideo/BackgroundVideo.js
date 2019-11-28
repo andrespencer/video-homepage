@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import './BackgroundVideo.css' 
 
 class BackgroundVideo extends PureComponent {
@@ -39,6 +40,10 @@ class BackgroundVideo extends PureComponent {
 	    </video>
     )
   }
+}
+
+BackgroundVideo.propTypes = {
+  theme: PropTypes.string.isRequired
 }
 
 export default BackgroundVideo

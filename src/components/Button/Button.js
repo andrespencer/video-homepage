@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import './Button.css' 
 
 class Button extends PureComponent {
@@ -13,6 +14,11 @@ class Button extends PureComponent {
     	</button>
     )
   }
+}
+
+Button.propTypes = {
+  text: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default Button

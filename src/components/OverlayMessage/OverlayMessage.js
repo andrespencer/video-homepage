@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import './OverlayMessage.css'
 
 class OverlayMessage extends PureComponent {
@@ -78,6 +79,14 @@ class OverlayMessage extends PureComponent {
       </main>
     )
   }
+}
+
+OverlayMessage.propTypes = {
+  heading: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  savedText: PropTypes.string.isRequired,
+  forceHeadingUpdate: PropTypes.bool.isRequired,
+  userChanged: PropTypes.bool.isRequired
 }
 
 export default OverlayMessage
