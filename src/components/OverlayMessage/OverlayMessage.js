@@ -61,8 +61,9 @@ class OverlayMessage extends PureComponent {
       <main className="OverlayMessage">
         <div className="OverlayMessage__Wrapper">
         	<h1 className="OverlayMessage__Heading"
-            contentEditable="true" 
+            contentEditable="true"
             suppressContentEditableWarning={true}
+            spellCheck="false"            
             onInput={this.handleChange}
             onBlur={this.handleBlur}
             onKeyDown={this.handleKeyDown}
