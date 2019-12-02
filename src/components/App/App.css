@@ -11,9 +11,8 @@ ol, ul {
   list-style: none;
 }
 
-
-
 .App {
   min-height: 100vh;
   text-align: center;
+  background-color: black;
 }
