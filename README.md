@@ -17,9 +17,11 @@ The app was designed so that a user can:
 1. ~~Prevent user from making the heading vertically larger than the page~~ ✅
 2. ~~Set `PropTypes`~~ ✅
 3. ~~Load a thumbnail of the video while the video loads~~ ✅
-4. Accessibility improvements
-5. Refactor to use React context
-6. Easter egg with the word "karma"
+4. Easter egg with the word "karma"
+5. Try to avoid scrolling on the heading by reducing the font-size dinamically
+6. Accessibility improvements
+7. Refactor to use React context
+
 
 ## Setup
 
